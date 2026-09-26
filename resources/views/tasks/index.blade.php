@@ -48,7 +48,7 @@
         <div class="card task-card task-priority-{{ $task->priority }} shadow-sm bg-white">
             <div class="card-body d-flex align-items-center justify-content-between py-3">
                 <div class="d-flex align-items-center gap-3">
-                    <form action="{{ route('tasks.toggle', $task) }}" method="POST" class="m-0">
+                    <form action="{{ route('tasks.toggle', $task, false) }}" method="POST" class="m-0">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="btn btn-sm rounded-circle p-0 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px; border: 2px solid {{ $task->status === 'Completed' ? '#198754' : '#adb5bd' }}; background: {{ $task->status === 'Completed' ? '#198754' : 'transparent' }}; color: white;">
@@ -77,7 +77,7 @@
                     <button class="btn btn-sm btn-light text-secondary" data-bs-toggle="modal" data-bs-target="#editTaskModal{{ $task->id }}">
                         <i class="bi bi-pencil"></i>
                     </button>
-                    <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="m-0">
+                    <form action="{{ route('tasks.destroy', $task, false) }}" method="POST" class="m-0">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-light text-danger"><i class="bi bi-trash"></i></button>
@@ -89,7 +89,7 @@
         <!-- Edit Modal -->
         <div class="modal fade" id="editTaskModal{{ $task->id }}" tabindex="-1">
             <div class="modal-dialog">
-                <form action="{{ route('tasks.update', $task) }}" method="POST" class="modal-content">
+                <form action="{{ route('tasks.update', $task, false) }}" method="POST" class="modal-content">
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
@@ -138,7 +138,7 @@
 <!-- Add Task Modal -->
 <div class="modal fade" id="addTaskModal" tabindex="-1">
     <div class="modal-dialog">
-        <form action="{{ route('tasks.store') }}" method="POST" class="modal-content">
+        <form action="{{ route('tasks.store', [], false) }}" method="POST" class="modal-content">
             @csrf
             <div class="modal-header">
                 <h5 class="modal-title fw-bold">Create New Task</h5>
